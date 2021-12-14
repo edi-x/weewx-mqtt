@@ -478,6 +478,9 @@ class MQTTThread(weewx.restx.RESTThread):
         if self.skip_upload:
             loginf("skipping upload")
             return
+        if not data:
+            logdbg("skipping upload because data is empty")
+            return
         url = urlparse(self.server_url)
         for _count in range(self.max_tries):
             try:
